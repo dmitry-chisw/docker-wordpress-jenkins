@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
 
     fe.vm.network :private_network, ip: "192.168.0.10"
     fe.vm.network "forwarded_port", guest: 80, host: 80
-    fe.vm.provision "file", source: "~/load-balancer.conf", destination: "~/load-balancer.conf"
+    fe.vm.provision "file", source: "load-balancer.conf", destination: "load-balancer.conf"
 
     fe.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
