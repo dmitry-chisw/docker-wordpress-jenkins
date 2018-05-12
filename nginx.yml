@@ -1,0 +1,34 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  tasks:
+   - name: Update repositories cache
+     apt:
+       update_cache: yes
+
+   - name: Install nginx
+     apt:
+       name: nginx
+       state: latest
+
+   - name: LB config
+     shell: mv /home/vagrant/load-balancer.conf /etc/nginx/conf.d/
+
+   - name: Remove default site config file
+     file:
+       path: /etc/nginx/sites-enabled/default
+       state: absent
+  
+   - name: Install git
+     apt:
+       name: git
+       state: latest
+
+   - name: Ensure nginx is started and enabled to start at boot.
+     service: 
+       name: nginx 
+       state: started 
+       enabled: yes
+
