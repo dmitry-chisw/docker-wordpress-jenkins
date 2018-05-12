@@ -12,7 +12,6 @@ Vagrant.configure("2") do |config|
     fe.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--memory", 256]
-      v.customize ["modifyvm", :id, "--name", "frontend"]
     end
 
     fe.vm.provision 'ansible' do |ansible|
@@ -30,7 +29,6 @@ Vagrant.configure("2") do |config|
     be1.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--memory", 256]
-      v.customize ["modifyvm", :id, "--name", "backend-1"]
     end    
 
     be1.vm.synced_folder "/synced", "/sync", create: true
@@ -50,7 +48,6 @@ Vagrant.configure("2") do |config|
     be2.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--memory", 256]
-      v.customize ["modifyvm", :id, "--name", "backend-2"]
     end
    
     be2.vm.synced_folder "/synced", "/sync", create: true
